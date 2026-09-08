@@ -1,0 +1,682 @@
+Complete Setup & Running Guide
+1. Project Overview
+
+Project Name: Webvertex Technologies
+
+Frontend:
+
+HTML5
+CSS3
+JavaScript
+Font Awesome
+Responsive design
+
+Backend:
+
+Node.js
+Express.js
+CORS
+dotenv
+MySQL2
+Multer
+bcryptjs
+JSON Web Token
+
+Database:
+
+MySQL / MariaDB
+phpMyAdmin
+XAMPP
+2. Required Software
+
+Install these on your computer:
+
+✅ VS Code
+
+Used for writing and editing the project.
+
+✅ Node.js
+
+Used to run the backend.
+
+Check installation:
+
+node -v
+
+and:
+
+npm -v
+✅ XAMPP
+
+Used for:
+
+Apache
+MySQL
+✅ Google Chrome
+
+Used for opening and testing the website.
+
+✅ phpMyAdmin
+
+Used to manage the MySQL database.
+
+3. Project Folder Structure
+
+Your project is located at:
+
+C:\Users\saite\OneDrive\Desktop\webvertex
+
+The structure should be:
+
+webvertex
+│
+├── assets
+│
+├── backend
+│   ├── node_modules
+│   ├── .env
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
+│
+├── node_modules
+├── index.html
+├── script.js
+├── style.css
+├── package.json
+└── package-lock.json
+Important files
+File	Purpose
+index.html	Website structure
+style.css	Website design
+script.js	Website functionality
+backend/server.js	Backend/API
+backend/.env	Database configuration
+backend/package.json	Backend dependencies
+assets/	Images/assets
+4. XAMPP Setup
+
+Open:
+
+XAMPP Control Panel
+
+Start:
+
+Apache  → Running 🟢
+MySQL   → Running 🟢
+
+You need MySQL because your quotation data is stored in the database.
+
+Apache is useful for local web serving/phpMyAdmin.
+
+5. Database Setup
+
+Open phpMyAdmin.
+
+Create/use database:
+
+webvertex
+
+Your database currently contains:
+
+admins
+inquiries
+projects
+quotations
+services
+
+The important table for your Quote Request form is:
+
+quotations
+
+Its columns are:
+
+id
+name
+email
+phone
+project_type
+budget
+requirements
+status
+created_at
+6. .env Setup
+
+Location:
+
+webvertex
+└── backend
+    └── .env
+
+Your .env currently contains:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=webvertex
+DB_PORT=3306
+Important
+
+Your MySQL root account currently has no password, so:
+
+DB_PASSWORD=
+
+is intentional.
+
+⚠️ Security
+
+Never upload .env to GitHub.
+
+Add this to:
+
+backend/.gitignore
+.env
+node_modules/
+7. Backend Dependencies
+
+Go to backend folder:
+
+cd C:\Users\saite\OneDrive\Desktop\webvertex\backend
+
+Install dependencies:
+
+npm install
+
+Your backend uses packages such as:
+
+express
+cors
+mysql2
+dotenv
+bcryptjs
+jsonwebtoken
+multer
+
+If they are already installed, you don't need to install them every time.
+
+8. Backend Server
+
+Your backend file is:
+
+backend/server.js
+
+It provides:
+
+Main backend
+http://localhost:5000
+Database test
+http://localhost:5000/api/test-db
+Quote API
+POST /api/quotations
+
+The Quote Request form sends information to this API.
+
+9. How the Quote System Works
+
+When a customer fills the form:
+
+Name
+Email
+Phone
+Service
+Budget
+Project Description
+
+and clicks:
+
+Send Quote Request
+
+the flow is:
+
+Customer
+   ↓
+index.html
+   ↓
+script.js
+   ↓
+POST /api/quotations
+   ↓
+Node.js / Express
+   ↓
+MySQL
+   ↓
+webvertex database
+   ↓
+quotations table
+
+The data is saved with:
+
+status = pending
+
+and MySQL automatically stores:
+
+created_at
+10. COMPLETE PROJECT RUNNING PROCESS
+
+This is the part you should save in your notes.
+
+🟢 Step 1 — Start XAMPP
+
+Open XAMPP Control Panel.
+
+Start:
+
+Apache
+MySQL
+
+Both should show:
+
+Running
+🟢 Step 2 — Open VS Code
+
+Open:
+
+C:\Users\saite\OneDrive\Desktop\webvertex
+🟢 Step 3 — Open Terminal
+
+In VS Code:
+
+Terminal → New Terminal
+
+You should see:
+
+PS C:\Users\saite\OneDrive\Desktop\webvertex>
+🟢 Step 4 — Go to Backend
+
+Type:
+
+cd backend
+
+You should now see:
+
+PS C:\Users\saite\OneDrive\Desktop\webvertex\backend>
+🟢 Step 5 — Start Backend
+
+Type:
+
+npm start
+
+Expected:
+
+> backend@1.0.0 start
+> node server.js
+
+Webvertex server running at http://localhost:5000
+⚠️ DO NOT CLOSE THIS TERMINAL
+
+The backend must remain running.
+
+11. Test Database Connection
+
+After starting the backend, open:
+
+Test Webvertex MySQL Connection
+
+You should see:
+
+{
+  "success": true,
+  "message": "MySQL Connected Successfully",
+  "data": [
+    {
+      "connected": 1
+    }
+  ]
+}
+
+If you see this:
+
+✅ Database is connected.
+12. Start Frontend
+
+Your frontend is:
+
+index.html
+
+You can use Live Server in VS Code.
+
+If Live Server is installed:
+Open index.html
+Right-click
+Select Open with Live Server
+
+Chrome will open your website.
+
+13. Test Quote Form
+
+Go to:
+
+Get a Quote
+
+Fill:
+
+Name
+Phone
+Email
+Service
+Budget
+Project Description
+
+Example:
+
+Name:
+Test User
+
+Phone:
+9876543210
+
+Email:
+test@example.com
+
+Service:
+Business Website
+
+Budget:
+Below ₹10,000
+
+Project Description:
+Testing quotation system.
+
+Click:
+
+Send Quote Request
+
+You should see:
+
+Thank you! Your quote request has been received. We will contact you soon.
+
+14. Check Database
+
+Open phpMyAdmin.
+
+Select:
+
+webvertex
+   ↓
+quotations
+   ↓
+Browse
+
+You should see your submitted quotation.
+
+Example:
+
+id: 1
+name: Test User
+email: test@example.com
+phone: 9876543210
+project_type: Business Website
+budget: Below ₹10,000
+requirements: Testing quotation system.
+status: pending
+created_at: ...
+15. How to Stop the Project
+
+When you finish working:
+
+Stop backend
+
+Go to the PowerShell running Node.js.
+
+Press:
+
+Ctrl + C
+
+Backend stops.
+
+Stop XAMPP
+
+Open XAMPP.
+
+Click:
+
+Stop
+
+for:
+
+Apache
+MySQL
+16. Next Day — How to Start Again
+
+You do NOT need to reinstall everything.
+
+Don't run:
+
+npm install
+
+every time.
+
+Simply:
+
+1. Start XAMPP
+Apache → Start
+MySQL → Start
+2. Open VS Code
+
+Open:
+
+webvertex
+3. Open terminal
+cd backend
+4. Start backend
+npm start
+5. Open frontend
+
+Open index.html with Live Server.
+
+That's it. 🚀
+
+17. Important Commands
+
+Keep this list in your notes.
+
+Check Node.js
+node -v
+Check npm
+npm -v
+Go to project
+cd C:\Users\saite\OneDrive\Desktop\webvertex
+Go to backend
+cd backend
+Install backend packages
+npm install
+Start backend
+npm start
+Stop backend
+Ctrl + C
+18. Important URLs
+Backend
+
+Webvertex Backend
+
+Database test
+
+Webvertex Database Test
+
+phpMyAdmin
+
+phpMyAdmin
+
+19. Common Problems
+❌ Problem: npm start doesn't work
+
+Make sure you are inside:
+
+webvertex\backend
+
+Check:
+
+dir
+
+You should see:
+
+server.js
+package.json
+.env
+node_modules
+
+Then:
+
+npm start
+❌ Problem: Port 5000 already in use
+
+You may already have another Node server running.
+
+Press:
+
+Ctrl + C
+
+in the other backend terminal.
+
+Then:
+
+npm start
+❌ Problem: MySQL connection failed
+
+Check XAMPP:
+
+MySQL → Running 🟢
+
+Then check:
+
+backend/.env
+
+It should currently be:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=webvertex
+DB_PORT=3306
+❌ Problem: Quote says successful but database doesn't update
+
+Check that:
+
+Backend is running.
+Database is running.
+quotations table exists.
+Browser console has no JavaScript errors.
+The API is receiving the request.
+
+Check phpMyAdmin:
+
+webvertex → quotations → Browse
+20. Very Important — Don't Delete These
+
+Keep these files:
+
+index.html
+style.css
+script.js
+backend/server.js
+backend/.env
+backend/package.json
+backend/package-lock.json
+
+And keep:
+
+backend/node_modules
+
+You can recreate node_modules using:
+
+npm install
+
+if necessary.
+
+21. Project Architecture
+
+For your project documentation/presentation, you can explain it like this:
+
+                WEBVERTEX TECHNOLOGIES
+                         │
+                         ▼
+                ┌─────────────────┐
+                │    FRONTEND     │
+                │ HTML CSS JS     │
+                └────────┬────────┘
+                         │
+                         │ HTTP Request
+                         ▼
+                ┌─────────────────┐
+                │     BACKEND     │
+                │ Node.js Express │
+                └────────┬────────┘
+                         │
+                         │ MySQL Query
+                         ▼
+                ┌─────────────────┐
+                │    DATABASE     │
+                │ MySQL/MariaDB   │
+                │   webvertex     │
+                └─────────────────┘
+⭐ QUICK RUN CHECKLIST
+
+Save this short version separately:
+
+╔══════════════════════════════════════╗
+║     WEBVERTEX RUNNING CHECKLIST     ║
+╚══════════════════════════════════════╝
+
+1. Open XAMPP
+2. Start Apache
+3. Start MySQL
+
+4. Open VS Code
+5. Open webvertex project
+
+6. Open Terminal
+
+7. Run:
+   cd backend
+
+8. Run:
+   npm start
+
+9. Keep terminal OPEN
+
+10. Open index.html with Live Server
+
+11. Test website
+
+12. Test Quote Form
+
+13. Check:
+    phpMyAdmin
+      ↓
+    webvertex
+      ↓
+    quotations
+      ↓
+    Browse
+
+DONE ✅
+🎯 Your current status
+
+Your most important functionality is already working:
+
+Quote Form → JavaScript → Node.js → MySQL → quotations table ✅
+
+The next logical development step is an Admin Dashboard, where you can log in and see all quotation
+
+
+
+
+
+Run the Website
+Open XAMPP and start MySQL.
+
+Open VS Code terminal and run:
+
+
+Keep this terminal open.
+
+Open the website:
+
+
+
+
+admin pannel 
+
+ http://localhost:5000/admin.html
+
+ password is in .env file
